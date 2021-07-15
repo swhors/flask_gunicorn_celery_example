@@ -5,8 +5,8 @@
 # usage
 
 1. flask and celery
-  # celery -A tcelery.celery_app worker
-  # python main.py
+  - celery -A tcelery.celery_app worker
+  - python main.py
   
 2. flask and gunicorn
-  # gunicorn unicorn:app -b 0.0.0.0:5000 -w [worker node count]
+  - gunicorn unicorn:app -b 0.0.0.0:5000 -w [worker node count]
