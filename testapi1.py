@@ -16,6 +16,21 @@ class TestApi_Old(Resource):
     def get(cls) -> str:
         return cls.printhw(os.getpid())
 
+from lib.psql import PSQL
+
+psql = PSQL()
+
+class Api_StudentAdd(Resource):
+
+    @classmethod
+    def insert_student(cls, name:str, grade: int, work):
+        psql.insert(name=name, grade = grade, work=work)
+
+    @classmethod
+    def post(cls, name: str, grade: int):
+        work_data= request.data
+        cls.insert_student(name, grade, work_data)
+        return 'OK',200
 
 class TestApi_New(Resource):
 

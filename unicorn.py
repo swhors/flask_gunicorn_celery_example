@@ -28,13 +28,14 @@ errors = {
 def create_flask():
     app = Flask(__name__)
     app.logger.setLevel(logging.DEBUG)
-    from testapi1 import TestApi_New, TestApi_Old
+    from testapi1 import TestApi_New, TestApi_Old, Api_StudentAdd
     flask_cors.CORS(app, resources={r"/*": {"origins": "*"}})
     device_api_blueprint = Blueprint( "device_api", __name__, url_prefix="/api")
     device_api = flask_restful.Api(device_api_blueprint, errors=errors)
 
     device_api.add_resource(TestApi_Old, "/test/old")
     device_api.add_resource(TestApi_New, "/test/new")
+    device_api.add_resource(Api_StudentAdd, "/student/insert/<name>/<grade>")
     app.register_blueprint(device_api_blueprint)
     return app
 
