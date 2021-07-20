@@ -17,8 +17,11 @@ class TestApi_Old(Resource):
         return cls.printhw(os.getpid())
 
 from lib.psql import PSQL
+from lib.redisqueue import RedisQueue
 
 psql = PSQL()
+
+rqueue = RedisQueue(name='test', addr='localhost', port=6379, dbnum=1)
 
 class Api_StudentAdd(Resource):
 
@@ -28,8 +31,11 @@ class Api_StudentAdd(Resource):
 
     @classmethod
     def post(cls, name: str, grade: int):
-        work_data= request.data
-        cls.insert_student(name, grade, work_data)
+        work_data = request.data
+        id = cls.insert_student(name, grade, work_data)
+
+        rqueue.put_id(id)
+
         return 'OK',200
 
 class TestApi_New(Resource):

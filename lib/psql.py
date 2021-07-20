@@ -6,7 +6,8 @@ import os
 class PSQL:
     def __init__(self):
         print(__name__, '__init__')
-        self._engine = create_engine('postgres://127.0.0.1:5432/localtest') 
+        #self._engine = create_engine('postgres://127.0.0.1:5432/localtest') 
+        self._engine = create_engine("postgresql://simpson:aq1234@127.0.0.1:5432/simpson") 
         self._metadata = MetaData(self._engine)
         self._metadata.create_all()
         self._session = sessionmaker(self._engine)()
@@ -42,6 +43,8 @@ class PSQL:
         self._session.commit()
 
         self._session.expunge_all()
+
+        return 1
 
     def get_all(self) -> []:
         from model.student import Student

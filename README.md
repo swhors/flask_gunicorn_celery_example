@@ -13,3 +13,7 @@
   
 2. flask and gunicorn
   - gunicorn unicorn:app -b 0.0.0.0:5000 -w [worker node count]
+
+3. Notice
+  - Befor pip install, you must intall library like below:
+    sudo apt install libpq-dev 
